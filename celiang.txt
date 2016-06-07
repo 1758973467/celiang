@@ -1,0 +1,11 @@
+<NotepadPlus>
+    <Project name="celiang">
+        <Folder name="celiang">
+            <File name="calc.h" />
+            <File name="common.h" />
+            <File name="Degree.cpp" />
+            <File name="GetData.cpp" />
+            <File name="mian.cpp" />
+        </Folder>
+    </Project>
+</NotepadPlus>
