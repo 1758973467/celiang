@@ -1,7 +1,8 @@
-#include"clac.h"
+#include"calc.h"
 //计算坐标
 bool calcposition(daoxian a)
 {
+	using namespace std;
 	switch(a)
 	{
 		case BIHE:
@@ -22,17 +23,17 @@ bool calcposition(daoxian a)
 }
 int CalcPositionBIHE()
 {
-	//
-	assert(a.daoxian==BIHE);
+	using namespace std;
+	assert(a.m_daoxian==BIHE);
 	pos start;
 	Degvector deg_vector;
-	length_vector length_vector;
+	vector<double> length_vector;
 	GetData(deg_vector,length_vector,start);
 	
 	Degree sum(0,0,0);
 	for(int i=0;i<deg_vector.size();++i)
 	{
-		sum+=deg_vector[i];
+		sum=sum+deg_vector[i];
 	}
 	Degree standrad((n-2)*180,0,0);//n为测站数
 	Degree chai=sum-standrad;
@@ -42,17 +43,17 @@ int CalcPositionBIHE()
 	else 
 		reclassifydegree(chai.changmiao(),length_vector,deg_vector);//平差
 	//计算坐标增量
-	std::vector<pos>pos_cahnge;
+	std::vector<pos>pos_change;
 	calc_pos_change(length_vector,deg_vector,pos_change);
 	//计算坐标
 	pos srart;//必须
 	std::vector<pos>pos_vector;
-	pos_vector.push_back(start.x,start.y);
+	pos_vector.push_back(pos(start.x,start.y));
 	for(int i=0;i<num;++i)
 	{
 		pos_vector.push_back(
-		pos_vector[i].x+pos_cahnge_vector[i].x,
-		pos_vector[i].y+pos_cahnge_vector[i].y
+		pos_vector[i].x+pos_change_vector[i].x,
+		pos_vector[i].y+pos_change_vector[i].y
 		);
 	}
 }

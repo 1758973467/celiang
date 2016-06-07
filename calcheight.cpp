@@ -1,6 +1,7 @@
 //计算高程
+#include"calc.h"
 
-calcheight(daoxian a)
+void calcheight(daoxian a)
 {
 	
 	

@@ -12,7 +12,7 @@ int GetDegreeData(Degvector&a);
 int GetLengthData(Dvector&a);
 void GetPos(pos&start);
 
-calcposition(daoxian a);//总函数
+void calcposition(daoxian a);//总函数
 int CalcPositionBIHE();
 void reclassifydegree(UINT need_classify,Dvector&length_vector,Degvector&deg_vector);
 int calc_pos_change(Dvector&length_vector,Degvector&deg_vector,std::vector<pos>pos_change_vector);

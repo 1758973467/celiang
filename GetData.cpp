@@ -1,10 +1,10 @@
 //getdata
-
-
+#include"common.h"
+#include"calc.h"
 bool GetData(Degvector&dega,Dvector&da,pos&start)
 {
 	assert(dega.size()==0);
-	assert(da.size()===0);
+	assert(da.size()==0);
 	
 	GetPos(start);
 	

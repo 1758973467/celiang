@@ -39,7 +39,9 @@ leixing printcalcmenu()
 	{
 		cout<<"*";
 	}
-	cin>>a.daoxian;
+	int temp;
+	cin>>temp;
+	a.m_daoxian=static_cast<daoxian>(temp);
 	cout<<"请选择要进行的计算："<<endl;
 	cout<<"1 高程"<<endl;
 	cout<<"2 坐标"<<endl;
@@ -47,13 +49,18 @@ leixing printcalcmenu()
 	{
 		cout<<"*";
 	}
-	cin>>a.m_calc;
+
+	cin>>temp;
+	a.m_calc=static_cast<calc>(temp);
 	return a;
+}
+void  printabout()
+{
 }
 int main()
 {
-	printstartmenu();//打印菜单
-	switch(selectfunction)
+	
+	switch(printstartmenu())
 	{
 		case 1:
 		break;
@@ -66,7 +73,7 @@ int main()
 		return -1;
 	}
 	leixing a=printcalcmenu();
-	switch a.m_calc
+	switch (a.m_calc)
 	{
 		case HEIGHT:
 		calcheight(a.daoxian);
@@ -74,8 +81,7 @@ int main()
 		case POSTION:
 		calcposition(a.daoxian);
 		break;
-		default:
-		return -1;
+		
 	}
 	return 0;
 }
