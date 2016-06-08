@@ -9,7 +9,7 @@ double round(double value,int number)
 	using namespace std;
 	assert(number>=0);
 	char*dest=new char[20];
-	sprintf(dest,"%f",value);
+	sprintf_s(dest,20,"%f",value);
 	string answer=dest;
 	int index=answer.find_first_of(".");
 	if(index<0)
@@ -17,10 +17,11 @@ double round(double value,int number)
 		cout<<"convert false;"<<endl;
 		return value;
 	}
-	answer.remove()//
-	return atof(answer);
+	answer.erase(index,answer.size()-index);
+	return atof(answer.data());
 }
 //方法2 
+/*
 #include<sstream>
 double round(double value,int number)
 {
@@ -28,17 +29,18 @@ double round(double value,int number)
 	stringstream ss;
 	ss<<value;
 	string answer;
-	answer<<ss;
+//	answer<<ss;
 	int index=answer.find_first_of(".");
 	if(index<0)
 	{
 		cout<<"convert false;"<<endl;
 		return value;
 	}
-	answer.remove();
+	answer.erase(index,answer.size()-index);
 	istringstream iss(answer);
 	double new_value;
 	iss>>new_value;
 	return new_value;
 	
 }
+*/

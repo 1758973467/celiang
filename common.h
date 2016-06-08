@@ -1,4 +1,5 @@
-
+#ifndef _COMMON_H
+#define _COMMON_H
 #include<vector>
 #include<iostream>
 #include<cmath>
@@ -19,6 +20,7 @@ struct pos
 	double y;
 };
 
-
+typedef unsigned UINT;
 typedef std::vector<double>Dvector;
 typedef std::vector<Degree>Degvector;
+#endif

@@ -1,4 +1,6 @@
-
+#include<iostream>
+#ifndef _DEGREE_H
+#define _DEGREE_H
 class Degree
 {
 private:
@@ -12,7 +14,9 @@ public:
 	Degree operator-(Degree&other);
 	bool operator==(Degree&other);
 	bool operator<(Degree&other);
+	friend std::ostream& operator<<(std::ostream&out,Degree&other);
 	int changmiao();
 	double ChangeRAD();
 	static void ChangePI(double new_PI);
 };
+#endif

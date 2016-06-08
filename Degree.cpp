@@ -6,7 +6,7 @@ typedef unsigned UINT;
 
  double Degree::PI=3.1415926;
 //complention
-Degree::Degree(int du=0,int fen=0,int miao=0)
+Degree::Degree(int du,int fen,int miao)
 :m_du(du),m_fen(fen),m_miao(miao)
 {
 	normalize();
@@ -82,6 +82,11 @@ bool Degree::operator<(Degree&other)
 	}
 	else return false;
 	
+}
+std::ostream& operator<<(std::ostream&out,Degree&other)
+{
+	out<<other.m_du<<"度"<<other.m_fen<<"分"<<other.m_miao<<"秒";
+	return out;
 }
 inline int Degree::changmiao()
 {

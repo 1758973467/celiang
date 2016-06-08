@@ -18,7 +18,7 @@ bool GetData(Degvector&dega,Dvector&da,pos&start)
 int GetDegreeData(Degvector&a)//返回a的大小
 {
 	using namespace std;
-	cout<<"请输入角度值（例 90 36 40）按回车键输入，输入-1结束："<<endl;
+	cout<<"请输入角度值(度 分 秒)按回车输入-1结束:"<<endl;
 	int du,fen,miao;
 	int temp=0;
 	while(1)
@@ -38,7 +38,7 @@ int GetLengthData(Dvector&a)
 {
 	using namespace std;
 	cout<<"请输入长度值（例 1.23）按回车键输入，输入-1结束："<<endl;
-	double temp=0.0;
+;	double temp=0.0;
 	while(1)
 	{
 		cin>>temp;

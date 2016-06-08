@@ -3,6 +3,7 @@
 */
 //导线计算 1 坐标 2 高程
 #include"common.h"
+#include"calc.h"
 int  printstartmenu()
 {
 	using namespace std;
@@ -76,10 +77,10 @@ int main()
 	switch (a.m_calc)
 	{
 		case HEIGHT:
-		calcheight(a.daoxian);
+		calcheight(a.m_daoxian);
 		break;
 		case POSTION:
-		calcposition(a.daoxian);
+		calcposition(a.m_daoxian);
 		break;
 		
 	}
