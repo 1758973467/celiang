@@ -85,10 +85,10 @@ bool Degree::operator<(Degree&other)
 }
 std::ostream& operator<<(std::ostream&out,Degree&other)
 {
-	out<<other.m_du<<"度"<<other.m_fen<<"分"<<other.m_miao<<"秒";
+	out<<other.m_du<<"du"<<other.m_fen<<"fen"<<other.m_miao<<"miao";
 	return out;
 }
-inline int Degree::changmiao()
+ int Degree::changmiao()
 {
 	return m_du*60*60+m_fen*60+m_miao;
 }

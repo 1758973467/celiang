@@ -16,11 +16,7 @@ bool calcposition(daoxian a)
 		case ZHI:
 		CalcPositionZHI();
 		break;
-		default:
-		{
-			std::cout<<"错误的导线类型"<<std::endl;
-			return false;
-		}
+		
 	}
 	return true;
 	
@@ -51,7 +47,7 @@ int CalcPositionBIHE(daoxian a)
 	std::vector<pos>pos_change_vector;
 	calc_pos_change(length_vector,deg_vector,pos_change_vector);
 	//计算坐标
-	pos srart;//必须
+	//pos srart;//必须
 	std::vector<pos>pos_vector;
 	pos temp;
 	temp.x=start.x;

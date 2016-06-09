@@ -37,8 +37,9 @@ int GetDegreeData(Degvector&a)//返回a的大小
 int GetLengthData(Dvector&a)
 {
 	using namespace std;
-	cout<<"请输入长度值（例 1.23）按回车键输入，输入-1结束："<<endl;
-;	double temp=0.0;
+	cout<<"请输入长度值,例 1.23"<<endl;
+	cout<<"输入-1结束:"<<endl;
+	double temp=0.0;
 	while(1)
 	{
 		cin>>temp;
