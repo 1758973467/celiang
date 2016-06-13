@@ -134,13 +134,13 @@ bool Degree::operator<(Degree&other)
 std::ostream& operator<<(std::ostream&out,Degree&other)
 {
 	if(!other.plus_minus)out<<"-";
-	out<<other.m_du<<"du"<<other.m_fen<<"fen"<<other.m_miao<<"miao";
+	out<<other.m_du<<"°"<<other.m_fen<<"′"<<other.m_miao<<"″";
 	return out;
 }
  int Degree::changmiao()
 {
 	
-	return plus_minus==true?m_du*60*60+m_fen*60+m_miao:-1*m_du*60*60+m_fen*60+m_miao;
+	return plus_minus==true?m_du*60*60+m_fen*60+m_miao:-1*(m_du*60*60+m_fen*60+m_miao);
 }
 double Degree::ChangeRAD()
 {

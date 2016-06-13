@@ -67,36 +67,38 @@ struct alloc
 	int number;
 	double chai;
 };
-void reclassifydegree(UINT need_classify,Dvector&length_vector,Degvector&deg_vector)
+void reclassifydegree(int need_classify,Dvector&length_vector,Degvector&deg_vector)
 {
 	int n=deg_vector.size();
-	UINT average=static_cast<UINT>(need_classify/n);
-	UINT chai=need_classify-average*n;
+	int average=static_cast<int>(need_classify/n);
+	int chai=need_classify-average*n;
 	//得到距离差再平差
 	std::vector<alloc>a;
 	alloc temp;
 	for(int i=1;i<n;++i)
 	{
 		temp.number=i;
-		temp.chai=length_vector[i]-length_vector[i-1];
+		temp.chai=abs(length_vector[i]-length_vector[i-1]);
 		a.push_back(temp);
 	}
 	temp.number=n;
-	temp.chai=length_vector[n]-length_vector[0];
+	temp.chai=abs(length_vector[n-1]-length_vector[0]);
 	a.push_back(temp);
 	//sort 将距离差最大的排出来
+	
 	for(int i=0;i<n;++i)
 	{
-		for(int j=0;j<n-i;++j)
+		for(int j=i;j<n;++j)
 		{
 			if(a[i].chai<a[j].chai)
 				std::swap(a[i],a[j]);
 		}
 	}
-	
-	for(int i=0;i<chai;++i)
+	assert(chai==-2);
+	int number=abs(chai);
+	for(int i=0;i<number;++i)
 	{
-		deg_vector[i]+Degree(0,0,chai/abs(static_cast<int>(chai)));
+		deg_vector[i]+Degree(0,0,chai/abs(chai));
 	}
 	//print Degvector;
 	for(int i=0;i<n;++i)

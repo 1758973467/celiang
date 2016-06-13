@@ -13,7 +13,7 @@ void GetPos(pos&start);
 //CalcPosition.h
 bool calcposition(daoxian a);//×Üº¯Êý
 int CalcPositionBIHE(daoxian a);
-void reclassifydegree(UINT need_classify,Dvector&length_vector,Degvector&deg_vector);
+void reclassifydegree(int need_classify,Dvector&length_vector,Degvector&deg_vector);
 int calc_pos_change(Dvector&length_vector,Degvector&deg_vector,std::vector<pos>pos_change_vector);
 int reclassifypos_change(pos&need_classify,std::vector<pos>&pos_change_vector,Dvector&length_vector);//
 
