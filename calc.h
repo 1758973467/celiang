@@ -11,7 +11,7 @@ int GetDegreeData(Degvector&a);
 int GetLengthData(Dvector&a);
 void GetPos(pos&start);
 //CalcPosition.h
-bool calcposition(daoxian a);//æ€»å‡½æ•°
+bool calcposition(daoxian a);//×Üº¯Êý
 int CalcPositionBIHE(daoxian a);
 void reclassifydegree(UINT need_classify,Dvector&length_vector,Degvector&deg_vector);
 int calc_pos_change(Dvector&length_vector,Degvector&deg_vector,std::vector<pos>pos_change_vector);

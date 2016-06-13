@@ -5,7 +5,8 @@
 bool calcposition(daoxian a)
 {
 	using namespace std;
-	switch(a)
+	
+	switch(a-1)
 	{
 		case BIHE:
 		CalcPositionBIHE(a);
@@ -24,7 +25,7 @@ bool calcposition(daoxian a)
 int CalcPositionBIHE(daoxian a)
 {
 	using namespace std;
-	assert(a==BIHE);
+	assert(a-1==BIHE);
 	
 	pos start;
 	Degvector deg_vector;
@@ -59,6 +60,7 @@ int CalcPositionBIHE(daoxian a)
 		temp.y=pos_vector[i].y+pos_change_vector[i].y;
 		pos_vector.push_back(temp);
 	}
+	return 0;
 }
 struct alloc
 {

@@ -31,7 +31,7 @@ Degree Degree::operator+(Degree&other)
 {
 	Degree answer(0,0,0);
 	answer.m_miao=(other.m_miao+m_miao)%60;
-	answer.m_fen=(other.m_du+m_fen+static_cast<int>((other.m_miao+m_miao)/60))%60;
+	answer.m_fen=(other.m_fen+m_fen+static_cast<int>((other.m_miao+m_miao)/60))%60;
 	answer.m_du=(other.m_du+m_du+static_cast<int>((other.m_fen+m_fen)/60));
 	answer.normalize();
 	return answer;
@@ -39,6 +39,7 @@ Degree Degree::operator+(Degree&other)
 Degree Degree::operator-(Degree&other)
 {
 	Degree answer(0,0,0);
+	
 	if(m_miao>other.m_miao)
 	{
 		if(m_fen<=0)
@@ -51,13 +52,14 @@ Degree Degree::operator-(Degree&other)
 	}
 	answer.m_miao=m_miao-other.m_miao;
 	if(m_fen<other.m_fen)
+
 	{
 		m_du-=1;
 		m_fen+=60;
 	}
 	answer.m_fen=m_fen-other.m_fen;
 	answer.m_du=m_du-other.m_du;
-	answer.normalize();
+	//answer.normalize();
 	return answer;
 }
 bool Degree::operator==(Degree&other)

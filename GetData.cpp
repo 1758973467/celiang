@@ -6,25 +6,25 @@ bool GetData(Degvector&dega,Dvector&da,pos&start)
 	assert(dega.size()==0);
 	assert(da.size()==0);
 	
-	GetPos(start);
+	//GetPos(start);
 	
 	int deg_number=GetDegreeData(dega);
-	int d_number=GetLengthData(da);
+	//int d_number=GetLengthData(da);
 	
-	if(deg_number==d_number)
+	//if(deg_number==d_number)
 		return true;
-	else return false;
+	//else return false;
 }
-int GetDegreeData(Degvector&a)//è¿”å›açš„å¤§å°
+int GetDegreeData(Degvector&a)//·µ»ØaµÄ´óĞ¡
 {
 	using namespace std;
-	cout<<"è¯·è¾“å…¥è§’åº¦å€¼(åº¦ åˆ† ç§’)æŒ‰å›è½¦è¾“å…¥-1ç»“æŸ:"<<endl;
+	cout<<"ÇëÊäÈë½Ç¶ÈÖµ(¶È ·Ö Ãë)°´»Ø³µÊäÈë-1½áÊø:"<<endl;//ÓĞÎÊÌâ
 	int du,fen,miao;
 	int temp=0;
 	while(1)
 	{
 		cin>>temp;
-		if(temp=-1)
+		if(temp==-1)
 		 break;
 		du=temp;
 		cin>>fen;
@@ -37,8 +37,8 @@ int GetDegreeData(Degvector&a)//è¿”å›açš„å¤§å°
 int GetLengthData(Dvector&a)
 {
 	using namespace std;
-	cout<<"è¯·è¾“å…¥é•¿åº¦å€¼,ä¾‹ 1.23"<<endl;
-	cout<<"è¾“å…¥-1ç»“æŸ:"<<endl;
+	cout<<"ÇëÊäÈë³¤¶ÈÖµ,Àı 1.23"<<endl;
+	cout<<"ÊäÈë-1½áÊø:"<<endl;
 	double temp=0.0;
 	while(1)
 	{
@@ -52,6 +52,7 @@ int GetLengthData(Dvector&a)
 void GetPos(pos&start)
 {
 	using namespace std;
-	cout<<"è¯·è¾“å…¥èµ·ç®—åæ ‡(ä¾‹ 400534.1 50.341):"<<endl;
+	cout<<"ÇëÊäÈëÆğËã×ø±ê(Àı 400534.1 50.341):"<<endl;
 	cin>>start.x>>start.y;
+	
 }
