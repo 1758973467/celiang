@@ -26,6 +26,12 @@ inline pos pos::operator+(pos &other)
 {
 	return pos(other.x+x,other.y+y);
 }
+template<class T>
+inline void printvector(T&a)
+{
+	using namespace std; 
+	cout<<a<<endl;
+}
 typedef unsigned UINT;
 typedef std::vector<double>Dvector;
 typedef std::vector<Degree>Degvector;

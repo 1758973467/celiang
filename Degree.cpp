@@ -18,6 +18,14 @@ Degree::Degree(int du,int fen,int miao)
 	m_miao=abs(m_miao);
 	normalize();
 }
+void Degree::set(int du,int fen,int miao)
+{
+	m_du=du;
+	m_fen=fen;
+	m_miao=miao;
+	normalize();
+
+}
 void Degree::normalize()//确保m_du,m_fen,m_miao在正确的范围之内
 {
 	assert(m_fen<=60&&m_fen>=0);
@@ -131,15 +139,20 @@ bool Degree::operator<(Degree&other)
 	else return false;
 	
 }
+Degree Degree::operator%(int number)
+{
+	//Degree answer(0,0,0);
+	m_du=m_du%number;
+	return *this;
+}
 std::ostream& operator<<(std::ostream&out,Degree&other)
 {
 	if(!other.plus_minus)out<<"-";
-	out<<other.m_du<<"°"<<other.m_fen<<"′"<<other.m_miao<<"″";
+	out<<other.m_du<<" "<<other.m_fen<<" "<<other.m_miao<<" ";
 	return out;
 }
  int Degree::changmiao()
 {
-	
 	return plus_minus==true?m_du*60*60+m_fen*60+m_miao:-1*(m_du*60*60+m_fen*60+m_miao);
 }
 double Degree::ChangeRAD()
