@@ -7,6 +7,7 @@
 #include<iomanip>
 #include<cassert>
 #include"Degree.h"
+#include"pos.h"
 enum daoxian{BIHE,FUHE,ZHI};
 enum calc{HEIGHT,POSTION};
 struct leixing
@@ -14,18 +15,8 @@ struct leixing
 	daoxian m_daoxian;
 	calc m_calc;
 };
-class pos
-{
-public:
-	pos(double _x=0.0,double _y=0.0):x(_x),y(_y){};
-	double x;
-	double y;
-	pos operator+(pos&other);
-};
-inline pos pos::operator+(pos &other)
-{
-	return pos(other.x+x,other.y+y);
-}
+
+
 template<class T>
 inline void printvector(T&a)
 {

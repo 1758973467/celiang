@@ -30,7 +30,8 @@ int CalcPositionBIHE(daoxian a)
 	pos start;
 	Degvector deg_vector;
 	vector<double> length_vector;
-	GetData(deg_vector,length_vector,start);
+	Degree startdegree;
+	GetData(deg_vector,length_vector,start,startdegree);
 	int n=deg_vector.size();
 	Degree sum(0,0,0);
 	for(int i=0;i<deg_vector.size();++i)
@@ -43,13 +44,16 @@ int CalcPositionBIHE(daoxian a)
 	if(miao>40*sqrt(deg_vector.size()))
 		return OVER_LIMITED;
 	else 
-		reclassifydegree(chai.changmiao(),length_vector,deg_vector);//平差
+		reclassifydegree(-1*chai.changmiao(),length_vector,deg_vector);//平差
+	//calc坐标方位角
+	Degvector grid_bear(n);
+	calcgrid_bearing(deg_vector,startdegree,grid_bear);
 	//计算坐标增量
-	std::vector<pos>pos_change_vector;
+	std::vector<pos>pos_change_vector(n);
 	calc_pos_change(length_vector,deg_vector,pos_change_vector);
 	//计算坐标
 	//pos srart;//必须
-	std::vector<pos>pos_vector;
+	std::vector<pos>pos_vector(n+1);
 	pos temp;
 	temp.x=start.x;
 	temp.y=start.y;
@@ -73,7 +77,7 @@ void reclassifydegree(int need_classify,Dvector&length_vector,Degvector&deg_vect
 	int average=static_cast<int>(need_classify/n);
 	int chai=need_classify-average*n;
 	//得到距离差再平差
-	std::vector<alloc>a;
+	std::vector<alloc>a(n);
 	alloc temp;
 	for(int i=1;i<n;++i)
 	{
@@ -94,19 +98,47 @@ void reclassifydegree(int need_classify,Dvector&length_vector,Degvector&deg_vect
 				std::swap(a[i],a[j]);
 		}
 	}
-	assert(chai==-2);
+
 	int number=abs(chai);
+	Degree sum(0,0,0);//校验
 	for(int i=0;i<number;++i)
 	{
-		deg_vector[i]+Degree(0,0,chai/abs(chai));
+		deg_vector[i]=deg_vector[i]+Degree(0,0,chai/abs(chai));
+	}
+	for(int i=0;i<n;++i)
+	{
+		deg_vector[i]=deg_vector[i]+Degree(0,0,average);
+		sum=sum+deg_vector[i];
+	}
+
+	if(sum==Degree((n-2)*180,0,0))
+	{
+		std::cout<<"success allocte degree"<<std::endl;
 	}
 	//print Degvector;
+	std::cout<<"改正后的角值："<<std::endl;
 	for(int i=0;i<n;++i)
 	{
 		std::cout<<deg_vector[i]<<" "<<std::endl;
 	}
 }
-
+void calcgrid_bearing(Degvector&deg_vector,Degree&startdegree,Degvector&grid_bear)
+{
+	int n=deg_vector.size();
+	grid_bear[0]=deg_vector[0]+Degree(180,0,0)+startdegree;
+	grid_bear[0]=grid_bear[0]%360;
+	for(int i=1;i<n;++i)
+	{
+		grid_bear[i]=deg_vector[i]+Degree(180,0,0)+grid_bear[i-1];
+		grid_bear[i]=grid_bear[i]%360;
+	}
+	using namespace std;
+	cout<<"坐标方位角:"<<endl;
+	for(int i=0;i<n;++i)
+	{
+		cout<<grid_bear[i]<<endl;
+	}
+}
 int calc_pos_change(Dvector&length_vector,Degvector&deg_vector,std::vector<pos>pos_change_vector)
 {
 	pos temp;
@@ -129,9 +161,14 @@ int calc_pos_change(Dvector&length_vector,Degvector&deg_vector,std::vector<pos>p
 	temp.x=fx;
 	temp.y=fy;
 	if(K_revese>=2000)
+	{
 		reclassifypos_change(temp,pos_change_vector,length_vector);
-	else std::cout<<"ERROR";
-	return OVER_LIMITED;
+		return 1;
+	}
+	else{
+		std::cout<<"ERROR"<<std::endl;
+		return OVER_LIMITED;
+	}
 }
 int reclassifypos_change(pos&need_classify,std::vector<pos>&pos_change_vector,Dvector&length_vector)
 {
@@ -158,6 +195,12 @@ int reclassifypos_change(pos&need_classify,std::vector<pos>&pos_change_vector,Dv
 	for(int i=0;i<num;++i)
 	{
 		pos_change_vector[i]=pos_change_vector[i]+classify_vector[i];
+	}
+
+	std::cout<<"改正后的坐标增量"<<std::endl;
+	for(int i=0;i<num;++i)
+	{
+		std::cout<<pos_change_vector[i]<<std::endl;
 	}
 	return 1;
 }
