@@ -12,10 +12,10 @@ bool calcposition(daoxian a)
 		CalcPositionBIHE(a);
 		break;
 		case FUHE:
-		CalcPositionFUHE();
+		CalcPositionFUHE(a);
 		break;
 		case ZHI:
-		CalcPositionZHI();
+		CalcPositionZHI(a);
 		break;
 		
 	}
@@ -66,10 +66,11 @@ int CalcPositionBIHE(daoxian a)
 	}
 	return 0;
 }
+<template typename T>
 struct alloc
 {
 	int number;
-	double chai;
+	T chai;
 };
 void reclassifydegree(int need_classify,Dvector&length_vector,Degvector&deg_vector)
 {
@@ -77,8 +78,8 @@ void reclassifydegree(int need_classify,Dvector&length_vector,Degvector&deg_vect
 	int average=static_cast<int>(need_classify/n);
 	int chai=need_classify-average*n;
 	//得到距离差再平差
-	std::vector<alloc>a(n);
-	alloc temp;
+	std::vector<alloc<double> >a(n);
+	alloc<double> temp;
 	for(int i=1;i<n;++i)
 	{
 		temp.number=i;
@@ -103,7 +104,7 @@ void reclassifydegree(int need_classify,Dvector&length_vector,Degvector&deg_vect
 	Degree sum(0,0,0);//校验
 	for(int i=0;i<number;++i)
 	{
-		deg_vector[i]=deg_vector[i]+Degree(0,0,chai/abs(chai));
+		deg_vector[a[i].number-1]=deg_vector[a[i].number-1]+Degree(0,0,chai/abs(chai));
 	}
 	for(int i=0;i<n;++i)
 	{
@@ -205,11 +206,11 @@ int reclassifypos_change(pos&need_classify,std::vector<pos>&pos_change_vector,Dv
 	return 1;
 }
 
-int CalcPositionFUHE()
+int CalcPositionFUHE(daoxian a)
 {
 	return 0;
 }
-int CalcPositionZHI()
+int CalcPositionZHI(daoxian a)
 {
 	return 0;
 }
