@@ -6,6 +6,7 @@
 #include<fstream>
 #include<iomanip>
 #include<cassert>
+#include<string>
 #include"Degree.h"
 #include"pos.h"
 enum daoxian{BIHE,FUHE,ZHI};
@@ -18,10 +19,16 @@ struct leixing
 
 
 template<class T>
-inline void printvector(T&a)
+inline void printvector(std::vector<T>&a,const char*str="")
 {
 	using namespace std; 
-	cout<<a<<endl;
+	int size=a.size();
+	if(str!="")
+		cout<<str<<endl;
+	for(int i=0;i<size;++i)
+	{
+		cout<<a[i]<<endl;
+	}
 }
 typedef unsigned UINT;
 typedef std::vector<double>Dvector;

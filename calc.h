@@ -4,13 +4,22 @@
 #define _CALC_H
 #include<vector>
 #define OVER_LIMITED 0
-
+template <typename T>
+struct alloc
+{
+	int number;
+	T chai;
+};
+typedef std::vector<int>IntVector;
 //GetData.h
 bool GetData(Degvector&dega,Dvector&da,pos&start,Degree&startdegree);
 void GetDegreeStart(Degree&start);
 int GetDegreeData(Degvector&a);
 int GetLengthData(Dvector&a);
 void GetPos(pos&start);
+
+int GetHeightData(IntVector&a);
+int GetSiteData(std::vector<UINT>&sitevector);
 //CalcPosition
 bool calcposition(daoxian a);//×Üº¯Êý
 int CalcPositionBIHE(daoxian a);
@@ -28,4 +37,6 @@ void calcheight(daoxian a);
 int CalcHeightBIHE(daoxian a);
 int CalcHeightFUHE(daoxian a);
 int CalcHeightZHI(daoxian a);
+template<typename T>
+void reclassifyheight(int needclassify,std::vector<T>a,IntVector&heightchai);
 #endif

@@ -1,6 +1,7 @@
 
 #include"common.h"
 #include"Degree.h"
+#include<iomanip>
 typedef unsigned UINT;
 
 
@@ -147,8 +148,11 @@ Degree Degree::operator%(int number)
 }
 std::ostream& operator<<(std::ostream&out,Degree&other)
 {
+	using namespace std;
 	if(!other.plus_minus)out<<"-";
-	out<<other.m_du<<" "<<other.m_fen<<" "<<other.m_miao<<" ";
+	out<<other.m_du<<" ";
+	cout<<setfill('0')<<setw(2)<<other.m_fen<<" ";
+	cout<<setfill('0')<<setw(2)<<other.m_miao<<" ";
 	return out;
 }
  int Degree::changmiao()

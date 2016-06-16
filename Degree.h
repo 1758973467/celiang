@@ -11,11 +11,13 @@ protected:
 	void normalize();
 public:
 	Degree(int du=0,int fen=0,int miao=0);
+	void set(int du,int fen,int miao);
 	Degree operator+(Degree&other);
 	Degree operator-(Degree&other);
 	Degree operator-();
 	bool operator==(Degree&other);
 	bool operator<(Degree&other);
+	Degree operator%(int number);
 	friend std::ostream& operator<<(std::ostream&out,Degree&other);
 	int changmiao();
 	double ChangeRAD();

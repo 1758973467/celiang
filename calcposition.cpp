@@ -66,12 +66,7 @@ int CalcPositionBIHE(daoxian a)
 	}
 	return 0;
 }
-<template typename T>
-struct alloc
-{
-	int number;
-	T chai;
-};
+
 void reclassifydegree(int need_classify,Dvector&length_vector,Degvector&deg_vector)
 {
 	int n=deg_vector.size();

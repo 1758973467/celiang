@@ -18,7 +18,7 @@ int  printstartmenu()
 	{
 		cout<<"*";
 	}
-	
+	cout<<endl;
 	cin>>selectfunction;
 	
 	return selectfunction;
@@ -40,6 +40,7 @@ leixing printcalcmenu()
 	{
 		cout<<"*";
 	}
+	cout<<endl;
 	int temp;
 	cin>>temp;
 	a.m_daoxian=static_cast<daoxian>(temp);
@@ -50,7 +51,7 @@ leixing printcalcmenu()
 	{
 		cout<<"*";
 	}
-
+	cout<<endl;
 	cin>>temp;
 	a.m_calc=static_cast<calc>(temp);
 	return a;
@@ -74,7 +75,7 @@ int main()
 		return -1;
 	}
 	leixing a=printcalcmenu();
-	switch (a.m_calc)
+	switch (a.m_calc-1)
 	{
 		case HEIGHT:
 		calcheight(a.m_daoxian);

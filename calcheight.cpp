@@ -26,15 +26,14 @@ bool Selectcezhan_length()
 	cout<<"1 测站"<<endl<<"2 距离"<<endl;
 	int temp=0;
 	
-	do(
+	do{
 		cin>>temp;
-		if(temp==1||temp==2)
-			return temp==1?true:false;
-		cout<<"请重新输入"<<endl;
-	}while(1)
+	if(temp==1||temp==2)
+		return temp==1?true:false;
+	}while(1);
 }
 //等外测量
-typedef vector<int>IntVector;
+
 int CalcHeightBIHE(daoxian a)
 {
 	IntVector heightchai;
@@ -45,34 +44,45 @@ int CalcHeightBIHE(daoxian a)
 	bool mark=Selectcezhan_length();//true 为测站，false为距离
 	if(mark)
 	{
-		IntVector sitevector(n);
-		GetSiteData(sitevector);	
+		std::vector<UINT> sitevector(n);
+		GetSiteData(sitevector);
+		int sum=0;
+		for(int i=0;i<n;++i)
+		{
+			sum+=heightchai[i];
+		}
+		int fhr=0,fhc=0;//fhr fh容,fhc fh测
+		int cezhan_number,length_sum;
+		fhr=40*sqrt(cezhan_number);
+		if(abs(fhr)>abs(fhc))
+		
+		reclassifyheight(fhc,sitevector,heightchai);
+		
+	else std::cout<<"OVERLIMIT"<<std::endl;
 	}
 	else {
 		Dvector lengthvector(n);
 		GetLengthData(lengthvector);
+		int sum=0;
+		for(int i=0;i<n;++i)
+		{
+			sum+=heightchai[i];
+		}
+		int fhr=0,fhc=0;//fhr fh容,fhc fh测
+		int cezhan_number,length_sum;
+		fhr=12*sqrt(length_sum);
+		if(abs(fhr)>abs(fhc))
+		reclassifyheight(fhc,lengthvector,heightchai);
+		else std::cout<<"OVERLIMIT"<<std::endl;
 	}
-	int sum=0;
-	for(int i=0;i<n;++i)
-	{
-		sum+=heightchai[i];
-	}
-	int fhr=0,fhc=0;//fhr fh容,fhc fh测
-	int cezhan_number,length_sum;
-	mark==true?fhr=40*sqrt(cezhan_number):fhr=12*sqrt(length_sum);
+
 	
-	if(abs(fhr)>abs(fhc))
-		
-		mark==true?reclassifyheight(fhc,sitevector,heightchai):
-		reclassifyheight(fhc,lengthvector,heightchai);//liangzhongxingshi
-	else std::cout<<"OVERLIMIT"<<std::endl;
-	Printvector(heightchai,"改正后高差：");
+	printvector(heightchai,"改正后高差：");
 	
 	return 1;
 }
-//template<class T>
-
-void reclassifyheight(double needclassify,vector<T>a,Dvector&heightchai)//单位为m a是相关依据
+template<typename T>
+void reclassifyheight(int needclassify,std::vector<T>a,IntVector&heightchai)//单位为m a是相关依据
 {
 	int n=a.size();
 	IntVector allocate(n);
