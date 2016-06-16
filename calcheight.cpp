@@ -41,59 +41,61 @@ int CalcHeightBIHE(daoxian a)
 	GetHeightData(heightchai);
 	//区分测站和距离
 	int n=heightchai.size();
+	//计算高差闭合差
+	int sum=0;
+	for(int i=0;i<n;++i)
+	{
+		sum+=heightchai[i];
+	}
 	bool mark=Selectcezhan_length();//true 为测站，false为距离
 	if(mark)
 	{
 		std::vector<UINT> sitevector(n);
 		GetSiteData(sitevector);
-		int sum=0;
-		for(int i=0;i<n;++i)
-		{
-			sum+=heightchai[i];
-		}
+		
 		int fhr=0,fhc=0;//fhr fh容,fhc fh测
-		int cezhan_number,length_sum;
-		fhr=40*sqrt(cezhan_number);
+		int cezhan_number=0;
+		for(int i=0;i<n;i++)
+		{
+			cezhan_number+=sitevector[i];
+		}
+		fhr=static_cast<int>(40*sqrt(cezhan_number));
 		if(abs(fhr)>abs(fhc))
-		
-		reclassifyheight(fhc,sitevector,heightchai);
-		
-	else std::cout<<"OVERLIMIT"<<std::endl;
+			reclassifyheight(fhc,sitevector,heightchai);
+		else std::cout<<"OVERLIMIT"<<std::endl;
 	}
 	else {
 		Dvector lengthvector(n);
 		GetLengthData(lengthvector);
-		int sum=0;
+		
+		int fhr=0,fhc=0;//fhr fh容,fhc fh测
+		double length_sum=0;//单位以m记
 		for(int i=0;i<n;++i)
 		{
-			sum+=heightchai[i];
+			length_sum+=lengthvector[i];
 		}
-		int fhr=0,fhc=0;//fhr fh容,fhc fh测
-		int cezhan_number,length_sum;
-		fhr=12*sqrt(length_sum);
+		fhr=static_cast<int>(12*sqrt(length_sum/1000));
 		if(abs(fhr)>abs(fhc))
-		reclassifyheight(fhc,lengthvector,heightchai);
+			reclassifyheight(fhc,lengthvector,heightchai);
 		else std::cout<<"OVERLIMIT"<<std::endl;
 	}
-
-	
 	printvector(heightchai,"改正后高差：");
-	
 	return 1;
 }
-template<typename T>
-void reclassifyheight(int needclassify,std::vector<T>a,IntVector&heightchai)//单位为m a是相关依据
+template <typename T>
+void reclassifyheight(int needclassify,std::vector<T>basic,IntVector&heightchai)//单位为m a是相关依据
 {
-	int n=a.size();
+	int n=basic.size();
+ 	T sum=0;
+	for(int i=0;i<n;++i)
+	{
+		sum+=basic[i];
+	} 
+	
 	IntVector allocate(n);
-	T sum=0;
 	for(int i=0;i<n;++i)
 	{
-		sum+=a[i];
-	}
-	for(int i=0;i<n;++i)
-	{
-		allocate[i]=static_cast<int>(needclassify/sum*a[i]);
+		allocate[i]=static_cast<int>(needclassify/sum*basic[i]);
 	}
 	int intsum=0;
 	for(int i=0;i<n;++i)
@@ -101,37 +103,37 @@ void reclassifyheight(int needclassify,std::vector<T>a,IntVector&heightchai)//�
 		intsum+=allocate[i];
 	}
 	int chai=needclassify-intsum;
-	assert(chai>=0);
-	vector<alloc<T> >allocvector(n);
-	alloc<T> temp;
+	
+	std::vector<alloc<double> >reallocvector(n);
+	alloc<double> temp;
 	for(int i=1;i<n;++i)
 	{
 		temp.number=i;
-		temp.chai=abs(a[i]-a[i-1]);
-		allocate.push_back(temp);
+		temp.chai=abs(static_cast<double>(basic[i]-basic[i-1]));
+		reallocvector.push_back(temp);
 	}
 	temp.number=n;
-	temp.chai=abs(a[n-1]-a[0]);
-	a.push_back(temp);
+	temp.chai=abs(static_cast<double>(basic[n-1]-basic[0]));
+	reallocvector.push_back(temp);
 	//sort 将距离差最大的排出来
 	
 	for(int i=0;i<n;++i)
 	{
 		for(int j=i;j<n;++j)
 		{
-			if(allocvector[i].chai<allocvector[j].chai)
-				std::swap(allocvector[i],allocvector[j]);
+			if(reallocvector[i].chai<reallocvector[j].chai)
+				std::swap(reallocvector[i],reallocvector[j]);
 		}
 	}
 	//将余差分配
 	for(int i=0;i<abs(chai);++i)
 	{
-		heightchai[allocvector[i].number-1]+=chai/abs(chai);
+		heightchai[reallocvector[i].number-1]+=chai/abs(chai);
 	}
-	//将公式的分配
+	//按公式的分配
 	for(int i=0;i<n;++i)
 	{
-		heightchai[i]+=allocte[i];
+		heightchai[i]+=allocate[i];
 	}
 	
 }

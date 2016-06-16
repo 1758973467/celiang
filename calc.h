@@ -37,6 +37,6 @@ void calcheight(daoxian a);
 int CalcHeightBIHE(daoxian a);
 int CalcHeightFUHE(daoxian a);
 int CalcHeightZHI(daoxian a);
-template<typename T>
-void reclassifyheight(int needclassify,std::vector<T>a,IntVector&heightchai);
+template <typename T>
+void reclassifyheight(int needclassify,std::vector<T>basic,IntVector&heightchai);
 #endif
