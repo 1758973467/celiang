@@ -10,6 +10,8 @@ struct alloc
 	int number;
 	T chai;
 };
+enum Level{ONE,TWO,THREE,FOUR,OVER};
+
 typedef std::vector<int>IntVector;
 //GetData.h
 bool GetData(Degvector&dega,Dvector&da,pos&start,Degree&startdegree);
@@ -34,9 +36,9 @@ int CalcPositionFUHE();
 int CalcPositionZHI();
 //Calcheight
 void calcheight(daoxian a);
-int CalcHeightBIHE(daoxian a);
-int CalcHeightFUHE(daoxian a);
-int CalcHeightZHI(daoxian a);
+int CalcHeightBIHE(daoxian a,Level level=OVER);
+int CalcHeightFUHE(daoxian a,Level level=OVER);
+int CalcHeightZHI(daoxian a,Level level=OVER);
 template <typename T>
 void reclassifyheight(int needclassify,std::vector<T>basic,IntVector&heightchai);
 #endif

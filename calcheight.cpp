@@ -3,16 +3,33 @@
 
 void calcheight(daoxian a)
 {
+	std::cout<<"1 四等水准测量"<<std::endl<<"2 等外水准测量"<<std::endl;
+	std::cout<<"请输入高差等级:"<<std::endl;
+	Level rank;
+	int temp;
+	std::cin>>temp;
+	switch(temp)
+	{
+	case 1:
+		rank=FOUR;
+		break;
+	case 2:
+		rank=OVER;
+		break;
+	default:
+			std::cout<<" 类型error"<<std::endl;
+	}
+	return ;
 	switch(a-1)
 	{
 		case BIHE:
-		CalcHeightBIHE(a);
+		CalcHeightBIHE(a,rank);
 		break;
 		case FUHE:
-		CalcHeightFUHE(a);
+		CalcHeightFUHE(a,rank);
 		break;
 		case ZHI:
-		CalcHeightZHI(a);
+		CalcHeightZHI(a,rank);
 		break;
 		default:
 			std::cout<<" 类型error"<<std::endl;
@@ -34,8 +51,10 @@ bool Selectcezhan_length()
 }
 //等外测量
 
-int CalcHeightBIHE(daoxian a)
+
+int CalcHeightBIHE(daoxian a,Level level)
 {
+	if(level!=FOUR||level!=OVER)return 0;
 	IntVector heightchai;
 	
 	GetHeightData(heightchai);
@@ -48,18 +67,21 @@ int CalcHeightBIHE(daoxian a)
 		sum+=heightchai[i];
 	}
 	bool mark=Selectcezhan_length();//true 为测站，false为距离
+	int fhr=0,fhc=0;//fhr fh容,fhc fh测
 	if(mark)
 	{
 		std::vector<UINT> sitevector(n);
 		GetSiteData(sitevector);
 		
-		int fhr=0,fhc=0;//fhr fh容,fhc fh测
 		int cezhan_number=0;
 		for(int i=0;i<n;i++)
 		{
 			cezhan_number+=sitevector[i];
 		}
 		fhr=static_cast<int>(40*sqrt(cezhan_number));
+		if(level==FOUR){
+			fhr/=2;
+		}
 		if(abs(fhr)>abs(fhc))
 			reclassifyheight(fhc,sitevector,heightchai);
 		else std::cout<<"OVERLIMIT"<<std::endl;
@@ -68,7 +90,6 @@ int CalcHeightBIHE(daoxian a)
 		Dvector lengthvector(n);
 		GetLengthData(lengthvector);
 		
-		int fhr=0,fhc=0;//fhr fh容,fhc fh测
 		double length_sum=0;//单位以m记
 		for(int i=0;i<n;++i)
 		{
@@ -140,11 +161,12 @@ void reclassifyheight(int needclassify,std::vector<T>basic,IntVector&heightchai)
 
 
 
-int CalcHeightFUHE(daoxian a)
+
+int CalcHeightFUHE(daoxian a,Level level)
 {
 	return 1;
 }
-int CalcHeightZHI(daoxian a)
+int CalcHeightZHI(daoxian a,Level level)
 {
 	return 1;
 }
